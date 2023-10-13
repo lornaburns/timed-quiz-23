@@ -47,3 +47,12 @@ button {
   background-color: rgb(190, 37, 190);
   transition: 1;
 }
+#score {
+  text-align: center;
+  padding: 5px;
+  margin-top: 15px;
+}
+#initials {
+  padding: 5px;
+  margin-top: 15px;
+}
