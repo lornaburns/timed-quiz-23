@@ -10,8 +10,8 @@ Upload index.html and assets folder to web browser. Assets folder contains style
 
 ## Links:
 
-- [Webpage]()
-- [Repository]()
+- [Webpage](https://lornaburns.github.io/timed-quiz-23/)
+- [Repository](https://github.com/lornaburns/timed-quiz-23)
 
 ## Use:
 
