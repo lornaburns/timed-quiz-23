@@ -11,8 +11,9 @@
     <header>
       <h1>JavaScript Quiz</h1>
     </header>
-    <button id="start-button" type="submit">Start</button>
-    <div id="timer"></div>
+    <button id="start-button">Start</button>
+    <div id="time-left">Time remaining:</div>
+    <span id="timer"></span>
     <div id="question"></div>
     <div>
       <ul id="answers">
@@ -20,15 +21,19 @@
         <li class="answers" id="answerB"></li>
         <li class="answers" id="answerC"></li>
         <li class="answers" id="answerD"></li>
-        <div id="feedback"></div>
       </ul>
+      <div id="feedback"></div>
     </div>
 
     <form>
       <input id="initials" type="text" placeholder="Initials" />
       <div id="score"></div>
-      <button id="initials-submit" type="submit">Submit</button>
+      <button id="initialsSubmit" type="submit">Submit</button>
     </form>
+
+    <ul id="storedScores">
+      Scores:
+    </ul>
 
     <script src="./Assets/js/script.js"></script>
   </body>

@@ -1,3 +1,6 @@
+document.addEventListener("DOMContentLoaded", function () {
+  loadPage();
+});
 var question1 = "1)	What is the correct syntax for calling a function?";
 var question2 = "2)	What brackets are used for an array?";
 var question3 = "3)	Which of the following is not a data type?";
@@ -6,6 +9,7 @@ var question5 = "5)	What method would add an item to the end of an array?";
 var question6 = "6)	What method would return the number of items in an array?";
 var question7 = "7)	What tag do you use to link an external JavaScript file?";
 var question8 = "8)	How do you add a comment in JavaScript?";
+var finalScore = 0;
 
 var answerAchoices = [
   "myFunction();",
@@ -47,28 +51,53 @@ var answerDchoices = [
   "&lt;script&gt;",
   "(...)",
 ];
+
 var answers = document.getElementById("answers");
 var startButton = document.querySelector("#start-button");
+var timer = document.getElementById("timer");
+var timeLeft = document.getElementById("time-left");
+var secondsLeft = 60;
+var timerInterval = setInterval(function () {
+  secondsLeft--;
+  timer.textContent = secondsLeft;
+
+  if (secondsLeft < 0) {
+    clearInterval(timerInterval);
+
+    displayScore();
+  }
+}, 1000);
+
 var feedback = document.querySelector("#feedback");
 var answerA = document.getElementById("answerA");
 var answerB = document.getElementById("answerB");
 var answerC = document.getElementById("answerC");
 var answerD = document.getElementById("answerD");
 var score = document.getElementById("score");
+var initials = document.getElementById("initials");
+var initialsSubmit = document.getElementById("initialsSubmit");
+var storedScores = document.getElementById("storedScores");
 
 function loadPage() {
-  document.getElementById("answers").style.display = "none";
+  answers.style.display = "none";
+  timer.style.display = "none";
+  timeLeft.style.display = "none";
   feedback.innerHTML = "";
-  document.getElementById("initials").style.display = "none";
-  document.getElementById("initials-submit").style.display = "none";
+  startButton.style.display = "block";
+  initials.style.display = "none";
+  initialsSubmit.style.display = "none";
+  storedScores.style.display = "none";
   startButton.addEventListener("click", function () {
     displayQuestion1();
   });
 }
 //QUESTION 1//
+
 function displayQuestion1() {
   answers.style.display = "block";
   startButton.style.display = "none";
+  timeLeft.style.display = "block";
+  timer.style.display = "block";
 
   document.getElementById("question").innerHTML = question1;
   answerA.innerHTML = answerAchoices[0];
@@ -84,10 +113,15 @@ function displayQuestion1() {
 
 function handleQuestion1Correct() {
   feedback.innerHTML = "Correct!";
+  finalScore++;
+  console.log("1 right>>", finalScore);
+
   displayQuestion2();
 }
 function handleQuestion1Incorrect() {
   feedback.innerHTML = "Incorrect!";
+  secondsLeft -= 5;
+  console.log("1 wrong>>", finalScore);
   displayQuestion2();
 }
 //QUESTION 2//
@@ -98,6 +132,11 @@ function displayQuestion2() {
   document.getElementById("answerC").innerHTML = answerCchoices[1];
   document.getElementById("answerD").innerHTML = answerDchoices[1];
 
+  answerA.removeEventListener("click", handleQuestion1Correct);
+  answerB.removeEventListener("click", handleQuestion1Incorrect);
+  answerC.removeEventListener("click", handleQuestion1Incorrect);
+  answerD.removeEventListener("click", handleQuestion1Incorrect);
+
   answerA.addEventListener("click", handleQuestion2Incorrect);
   answerB.addEventListener("click", handleQuestion2Incorrect);
   answerC.addEventListener("click", handleQuestion2Correct);
@@ -105,10 +144,14 @@ function displayQuestion2() {
 }
 function handleQuestion2Correct() {
   feedback.innerHTML = "Correct!";
+  finalScore++;
+  console.log("2 right>>", finalScore);
   displayQuestion3();
 }
 function handleQuestion2Incorrect() {
   feedback.innerHTML = "Incorrect!";
+  secondsLeft -= 5;
+  console.log("2 wrong>>", finalScore);
   displayQuestion3();
 }
 
@@ -120,6 +163,11 @@ function displayQuestion3() {
   document.getElementById("answerC").innerHTML = answerCchoices[2];
   document.getElementById("answerD").innerHTML = answerDchoices[2];
 
+  answerA.removeEventListener("click", handleQuestion2Incorrect);
+  answerB.removeEventListener("click", handleQuestion2Incorrect);
+  answerC.removeEventListener("click", handleQuestion2Correct);
+  answerD.removeEventListener("click", handleQuestion2Incorrect);
+
   answerA.addEventListener("click", handleQuestion3Incorrect);
   answerB.addEventListener("click", handleQuestion3Incorrect);
   answerC.addEventListener("click", handleQuestion3Correct);
@@ -127,10 +175,14 @@ function displayQuestion3() {
 }
 function handleQuestion3Correct() {
   feedback.innerHTML = "Correct!";
+  finalScore++;
+  console.log("3 right>>", finalScore);
   displayQuestion4();
 }
 function handleQuestion3Incorrect() {
   feedback.innerHTML = "Incorrect!";
+  secondsLeft -= 5;
+  console.log("3 wrong>>", finalScore);
   displayQuestion4();
 }
 
@@ -142,6 +194,11 @@ function displayQuestion4() {
   document.getElementById("answerC").innerHTML = answerCchoices[3];
   document.getElementById("answerD").innerHTML = answerDchoices[3];
 
+  answerA.removeEventListener("click", handleQuestion3Incorrect);
+  answerB.removeEventListener("click", handleQuestion3Incorrect);
+  answerC.removeEventListener("click", handleQuestion3Correct);
+  answerD.removeEventListener("click", handleQuestion3Incorrect);
+
   answerA.addEventListener("click", handleQuestion4Incorrect);
   answerB.addEventListener("click", handleQuestion4Correct);
   answerC.addEventListener("click", handleQuestion4Incorrect);
@@ -149,10 +206,14 @@ function displayQuestion4() {
 }
 function handleQuestion4Correct() {
   feedback.innerHTML = "Correct!";
+  finalScore++;
+  console.log("4 right>>", finalScore);
   displayQuestion5();
 }
 function handleQuestion4Incorrect() {
   feedback.innerHTML = "Incorrect!";
+  secondsLeft -= 5;
+  console.log("4 wrong>>", finalScore);
   displayQuestion5();
 }
 
@@ -164,6 +225,11 @@ function displayQuestion5() {
   document.getElementById("answerC").innerHTML = answerCchoices[4];
   document.getElementById("answerD").innerHTML = answerDchoices[4];
 
+  answerA.removeEventListener("click", handleQuestion4Incorrect);
+  answerB.removeEventListener("click", handleQuestion4Correct);
+  answerC.removeEventListener("click", handleQuestion4Incorrect);
+  answerD.removeEventListener("click", handleQuestion4Incorrect);
+
   answerA.addEventListener("click", handleQuestion5Incorrect);
   answerB.addEventListener("click", handleQuestion5Correct);
   answerC.addEventListener("click", handleQuestion5Incorrect);
@@ -171,10 +237,14 @@ function displayQuestion5() {
 }
 function handleQuestion5Correct() {
   feedback.innerHTML = "Correct!";
+  finalScore++;
+  console.log("5 right>>", finalScore);
   displayQuestion6();
 }
 function handleQuestion5Incorrect() {
   feedback.innerHTML = "Incorrect!";
+  secondsLeft -= 5;
+  console.log("5 wrong>>", finalScore);
   displayQuestion6();
 }
 
@@ -186,6 +256,11 @@ function displayQuestion6() {
   document.getElementById("answerC").innerHTML = answerCchoices[5];
   document.getElementById("answerD").innerHTML = answerDchoices[5];
 
+  answerA.removeEventListener("click", handleQuestion5Incorrect);
+  answerB.removeEventListener("click", handleQuestion5Correct);
+  answerC.removeEventListener("click", handleQuestion5Incorrect);
+  answerD.removeEventListener("click", handleQuestion5Incorrect);
+
   answerA.addEventListener("click", handleQuestion6Incorrect);
   answerB.addEventListener("click", handleQuestion6Incorrect);
   answerC.addEventListener("click", handleQuestion6Correct);
@@ -193,10 +268,14 @@ function displayQuestion6() {
 }
 function handleQuestion6Correct() {
   feedback.innerHTML = "Correct!";
+  finalScore++;
+  console.log("6 right>>", finalScore);
   displayQuestion7();
 }
 function handleQuestion6Incorrect() {
   feedback.innerHTML = "Incorrect!";
+  secondsLeft -= 5;
+  console.log("6 wrong>>", finalScore);
   displayQuestion7();
 }
 
@@ -208,6 +287,11 @@ function displayQuestion7() {
   document.getElementById("answerC").innerHTML = answerCchoices[6];
   document.getElementById("answerD").innerHTML = answerDchoices[6];
 
+  answerA.removeEventListener("click", handleQuestion6Incorrect);
+  answerB.removeEventListener("click", handleQuestion6Incorrect);
+  answerC.removeEventListener("click", handleQuestion6Correct);
+  answerD.removeEventListener("click", handleQuestion6Incorrect);
+
   answerA.addEventListener("click", handleQuestion7Incorrect);
   answerB.addEventListener("click", handleQuestion7Incorrect);
   answerC.addEventListener("click", handleQuestion7Incorrect);
@@ -215,10 +299,14 @@ function displayQuestion7() {
 }
 function handleQuestion7Correct() {
   feedback.innerHTML = "Correct!";
+  finalScore++;
+  console.log("7 right>>", finalScore);
   displayQuestion8();
 }
 function handleQuestion7Incorrect() {
   feedback.innerHTML = "Incorrect!";
+  secondsLeft -= 5;
+  console.log("7 wrong>>", finalScore);
   displayQuestion8();
 }
 
@@ -230,6 +318,11 @@ function displayQuestion8() {
   document.getElementById("answerC").innerHTML = answerCchoices[7];
   document.getElementById("answerD").innerHTML = answerDchoices[7];
 
+  answerA.removeEventListener("click", handleQuestion7Incorrect);
+  answerB.removeEventListener("click", handleQuestion7Incorrect);
+  answerC.removeEventListener("click", handleQuestion7Incorrect);
+  answerD.removeEventListener("click", handleQuestion7Correct);
+
   answerA.addEventListener("click", handleQuestion8Correct);
   answerB.addEventListener("click", handleQuestion8Incorrect);
   answerC.addEventListener("click", handleQuestion8Incorrect);
@@ -237,10 +330,14 @@ function displayQuestion8() {
 }
 function handleQuestion8Correct() {
   feedback.innerHTML = "Correct!";
+  finalScore++;
+  console.log("8 right>>", finalScore);
   displayScore();
 }
 function handleQuestion8Incorrect() {
   feedback.innerHTML = "Incorrect!";
+  secondsLeft -= 5;
+  console.log("8 wrong>>", finalScore);
   displayScore();
 }
 
@@ -248,8 +345,27 @@ function displayScore() {
   document.getElementById("question").style.display = "none";
   answers.style.display = "none";
   feedback.style.display = "none";
-  score.innerHTML = "Score:";
+  timer.style.display = "none";
+  timeLeft.style.display = "none";
+  score.innerHTML = "Score: " + finalScore + "/8";
   document.getElementById("initials").style.display = "block";
-  document.getElementById("initials-submit").style.display = "block";
+  document.getElementById("initialsSubmit").style.display = "block";
 }
+
+initialsSubmit.addEventListener("click", storeScores);
+
+function storeScores(event) {
+  event.preventDefault();
+  localStorage.setItem("score", finalScore);
+  localStorage.setItem("initials", initials.value);
+  console.log(score, initials);
+
+  storedScores.innerHTML =
+    localStorage.getItem("initials") + ": " + localStorage.getItem("score");
+  storedScores.style.display = "block";
+  initials.style.display = "none";
+  initialsSubmit.style.display = "none";
+  score.style.display = "none";
+}
+
 loadPage();
