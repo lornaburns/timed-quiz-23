@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   loadPage();
 });
+//questions
 var question1 = "1)	What is the correct syntax for calling a function?";
 var question2 = "2)	What brackets are used for an array?";
 var question3 = "3)	Which of the following is not a data type?";
@@ -10,7 +11,7 @@ var question6 = "6)	What method would return the number of items in an array?";
 var question7 = "7)	What tag do you use to link an external JavaScript file?";
 var question8 = "8)	How do you add a comment in JavaScript?";
 var finalScore = 0;
-
+//answers
 var answerAchoices = [
   "myFunction();",
   "()",
@@ -55,12 +56,13 @@ var answerDchoices = [
 var answers = document.getElementById("answers");
 var startButton = document.querySelector("#start-button");
 var timer = document.getElementById("timer");
+//set up the timer
 var timeLeft = document.getElementById("time-left");
 var secondsLeft = 60;
 var timerInterval = setInterval(function () {
   secondsLeft--;
   timer.textContent = secondsLeft;
-
+  //if time runs out
   if (secondsLeft < 0) {
     clearInterval(timerInterval);
 
@@ -77,7 +79,7 @@ var score = document.getElementById("score");
 var initials = document.getElementById("initials");
 var initialsSubmit = document.getElementById("initialsSubmit");
 var storedScores = document.getElementById("storedScores");
-
+//when page loads, some things are shown, some are hidden
 function loadPage() {
   answers.style.display = "none";
   timer.style.display = "none";
@@ -110,7 +112,7 @@ function displayQuestion1() {
   answerC.addEventListener("click", handleQuestion1Incorrect);
   answerD.addEventListener("click", handleQuestion1Incorrect);
 }
-
+//if answer is correct
 function handleQuestion1Correct() {
   feedback.innerHTML = "Correct!";
   finalScore++;
@@ -118,6 +120,7 @@ function handleQuestion1Correct() {
 
   displayQuestion2();
 }
+//if answer is incorrect
 function handleQuestion1Incorrect() {
   feedback.innerHTML = "Incorrect!";
   secondsLeft -= 5;
@@ -340,7 +343,7 @@ function handleQuestion8Incorrect() {
   console.log("8 wrong>>", finalScore);
   displayScore();
 }
-
+//after last question, show some elements, hide others
 function displayScore() {
   document.getElementById("question").style.display = "none";
   answers.style.display = "none";
@@ -351,7 +354,7 @@ function displayScore() {
   document.getElementById("initials").style.display = "block";
   document.getElementById("initialsSubmit").style.display = "block";
 }
-
+//stores initials and score in local storage
 initialsSubmit.addEventListener("click", storeScores);
 
 function storeScores(event) {
@@ -359,7 +362,7 @@ function storeScores(event) {
   localStorage.setItem("score", finalScore);
   localStorage.setItem("initials", initials.value);
   console.log(score, initials);
-
+  //displays initials and score
   storedScores.innerHTML =
     localStorage.getItem("initials") + ": " + localStorage.getItem("score");
   storedScores.style.display = "block";
